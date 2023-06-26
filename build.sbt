@@ -9,7 +9,7 @@ lazy val root = (project in file("."))
 
 val flinkDependencies = {
   val groupId = "org.apache.flink"
-  val version = "1.15.2"
+  val version = "1.16.2"
   Seq(
     groupId %% "flink-streaming-scala" % version,
     groupId % "flink-clients" % version,
