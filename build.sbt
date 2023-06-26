@@ -12,7 +12,8 @@ val flinkDependencies = {
   val version = "1.15.2"
   Seq(
     groupId %% "flink-streaming-scala" % version,
-    groupId % "flink-clients" % version
+    groupId % "flink-clients" % version,
+    groupId % "flink-connector-kinesis" % version
   )
 }
 
