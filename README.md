@@ -27,3 +27,11 @@ bin/kinesis_producer.py <profile-name> <stream-arn>
 ```
 This should write ten random alphanumeric string messages to the indicated stream, which
 should show up in the STDOUT of the consumer.
+
+### Run MWE
+
+From IntelliJ: create a run configuration that sets the three required environment
+variables `AWS_REGION`, `AWS_PROFILE_NAME`, and `KINESIS_STREAM_NAME`. Then run 
+that run configuration.
+
+From SBT: export the above environment variables, then do `sbt run`.
