@@ -3,6 +3,8 @@
 import boto3
 from time import sleep
 from datetime import datetime, timedelta
+import argparse
+from contextlib import closing
 
 class ShardConsumer:
     def __init__(self, client, stream_arn, shard_id):
@@ -55,8 +57,22 @@ class KinesisConsumer:
             
             if consumers_all_caught_up:
                 sleep(1)
-                
-
 
     def close(self):
         self.client.close()
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("profile")
+    parser.add_argument("streamARN")
+    parser.add_argument("-t", "--timeout", type=int, default=60)
+    parser.add_argument("-r", "--max-records", type=int)
+    return parser.parse_args()
+
+def main(args):
+    with closing(KinesisConsumer(args.profile, args.streamARN)) as consumer:
+        for msg in consumer.consume(args.timeout, args.max_records):
+            print(msg.decode())
+
+if "__main__" == __name__:
+    main(parse_args())
